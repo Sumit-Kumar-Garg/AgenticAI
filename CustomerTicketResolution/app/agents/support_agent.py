@@ -1,30 +1,17 @@
+"""Tool-calling investigator agent.
 
-import os
+The model gathers evidence with allow-listed, read-only tools (ticket, booking,
+customer, history, knowledge-base search) and then explains the likely cause and
+the next action. Works with any OpenAI-compatible provider (Gemini, Groq, OpenAI);
+see app/llm.py.
+"""
 import json
-
-from dotenv import load_dotenv
-
 
 from app.agents.tool_definitions import TOOLS
 from app.agents.tool_executor import execute_tool
-from google import genai
+from app.llm import get_chat_client
 
-load_dotenv(override=True)
-
-client = genai.Client(api_key=os.getenv("OPENAI_API_KEY"))
-
-interaction = client.interactions.create(
-    model="gemini-4-hydrogen",
-    input="Explain how AI works in a few words"
-)
-print(interaction.output_text)
-
-
-
-MODEL = os.getenv(
-    "OPENAI_MODEL",
-    "gemini-4-hydrogen"
-)
+MAX_ITERATIONS = 8
 
 
 SYSTEM_PROMPT = """
@@ -62,88 +49,68 @@ Rules:
 """
 
 
+def _run_tool(tool_call):
+    """Execute one tool call. Errors go back to the model instead of crashing the loop."""
+    name = tool_call.function.name
+    arguments = {}
+    try:
+        arguments = json.loads(tool_call.function.arguments or "{}")
+        result = execute_tool(name, arguments)
+    except Exception as exc:
+        result = {"error": f"{type(exc).__name__}: {exc}"}
+    if result is None:
+        result = {"error": "not found"}
+    return name, arguments, result
+
+
 def investigate_ticket(ticket_id: str):
+    client, model = get_chat_client()
 
     messages = [
-        {
-            "role": "system",
-            "content": SYSTEM_PROMPT
-        },
+        {"role": "system", "content": SYSTEM_PROMPT},
         {
             "role": "user",
             "content": (
                 f"Investigate support ticket {ticket_id}. "
                 "Find the cause of the issue and recommend "
                 "the next action."
-            )
-        }
+            ),
+        },
     ]
 
     execution_log = []
 
-    max_iterations = 5
-
-    for iteration in range(max_iterations):
-
+    for _ in range(MAX_ITERATIONS):
         response = client.chat.completions.create(
-            model=MODEL,
+            model=model,
             messages=messages,
             tools=TOOLS,
-            tool_choice="auto"
+            tool_choice="auto",
         )
 
         assistant_message = response.choices[0].message
 
-        # No more tool calls: agent has finished
+        # No more tool calls: the agent has finished
         if not assistant_message.tool_calls:
-
             return {
                 "ticket_id": ticket_id,
                 "investigation": assistant_message.content,
-                "tool_execution_log": execution_log
+                "tool_execution_log": execution_log,
             }
 
-        # Add assistant tool-call message to conversation
-        messages.append(
-            assistant_message.model_dump(
-                exclude_none=True
-            )
-        )
+        # Keep the assistant's tool-call turn in the conversation
+        messages.append(assistant_message.model_dump(exclude_none=True))
 
-        # Execute every requested tool
         for tool_call in assistant_message.tool_calls:
+            name, arguments, result = _run_tool(tool_call)
 
-            tool_name = tool_call.function.name
+            execution_log.append({"tool": name, "arguments": arguments, "result": result})
 
-            arguments = json.loads(
-                tool_call.function.arguments
-            )
-
-            print(
-                f"Agent requested tool: {tool_name}"
-            )
-
-            result = execute_tool(
-                tool_name,
-                arguments
-            )
-
-            execution_log.append({
-                "tool": tool_name,
-                "arguments": arguments,
-                "result": result
-            })
-
-            # Send tool result back to the LLM
+            # Send the tool result back to the model
             messages.append({
                 "role": "tool",
                 "tool_call_id": tool_call.id,
-                "content": json.dumps(
-                    result,
-                    default=str
-                )
+                "content": json.dumps(result, default=str),
             })
 
-    raise RuntimeError(
-        "Agent exceeded maximum tool iterations"
-    )
+    raise RuntimeError(f"Agent exceeded {MAX_ITERATIONS} tool iterations")

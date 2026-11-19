@@ -1,5 +1,5 @@
 
-from rag.embedding_service import generate_embeddings
+from app.rag.embedding_service import generate_embeddings
 
 texts = [
     "Hotel booking confirmation issue",

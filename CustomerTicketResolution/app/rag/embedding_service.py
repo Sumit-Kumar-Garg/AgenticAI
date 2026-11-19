@@ -1,23 +1,22 @@
+from functools import lru_cache
 
-import os
-
-from dotenv import load_dotenv
-from google import genai
-
-load_dotenv(override=True)
-
-client = genai.Client(api_key=os.getenv("OPENAI_API_KEY"))
-
-
+from app.llm import get_google_api_key
 
 EMBEDDING_MODEL = "gemini-embedding-001"
+
+
+@lru_cache(maxsize=1)
+def _client():
+    from google import genai
+
+    return genai.Client(api_key=get_google_api_key())
 
 
 def generate_embeddings(texts: list[str]) -> list[list[float]]:
     if not texts:
         return []
 
-    response = client.models.embed_content(
+    response = _client().models.embed_content(
         model=EMBEDDING_MODEL,
         contents=texts
     )
@@ -26,4 +25,3 @@ def generate_embeddings(texts: list[str]) -> list[list[float]]:
         embedding.values
         for embedding in response.embeddings
     ]
-
