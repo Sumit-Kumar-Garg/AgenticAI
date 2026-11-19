@@ -110,10 +110,13 @@ cd AgenticAI/CustomerTicketResolution
 python3.12 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
-pip install -r requirements.txt chromadb langgraph langchain-google-genai langchain-groq google-genai pandas scikit-learn matplotlib jupyterlab
+pip install -r requirements.txt        # or requirements-lock.txt for exact versions
+cp .env.example .env                   # then add your API key
 ```
 
-Create a `.env` file:
+**VS Code:** open the `CustomerTicketResolution` folder. The workspace settings select `.venv` automatically, and the **Run and Debug** panel has ready-made launch configs for both APIs, the evaluation, the database build and knowledge-base ingestion.
+
+`.env` settings (see `.env.example`):
 
 ```env
 LLM_PROVIDER=gemini            # or: groq
