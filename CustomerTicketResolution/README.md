@@ -23,7 +23,7 @@ It is built as a **LangGraph state machine** with PII masking, retrieval of simi
 - **Prompt-injection aware.** The system prompt treats ticket text as customer content, never as instructions.
 - **Retrieval-augmented.** Similar resolved tickets (TF-IDF) are given to the LLM as few-shot context. A ChromaDB + Gemini-embeddings knowledge base handles semantic search over support articles.
 - **Measured, not guessed.** `evals/run_eval.py` scores the agent against a held-out, human-labelled golden set. The notebook compares it with a TF-IDF + logistic regression baseline, including a confidence-calibration check.
-- **Provider-agnostic.** You can switch between Google Gemini and Groq (Llama 3.3 70B) with one environment variable. Langfuse tracing is optional.
+- **Powered by Google Gemini**, configured with two settings in `.env`. Langfuse tracing is optional.
 
 ---
 
@@ -56,7 +56,7 @@ A second module (`app/agents/`, `app/rag/`, `app/services/`) is a **tool-calling
 - An allow-listed, read-only tool registry: `lookup_ticket`, `lookup_booking`, `lookup_customer`, `lookup_customer_history` and `search_support_knowledge`. The agent can't call any tool outside this list, and tool errors go back to the model instead of crashing the loop.
 - A RAG pipeline that loads, chunks, embeds (Gemini `gemini-embedding-001`) and stores knowledge-base articles in **ChromaDB** for semantic search.
 - An agent loop (max 8 iterations) that separates verified facts from assumptions and never claims to have taken an action.
-- It works with any OpenAI-compatible provider. Gemini and Groq both expose that API, so one code path covers all of them (`app/llm.py`).
+- It calls Gemini through Gemini's OpenAI-compatible API, which supports tool calling (`app/llm.py`).
 
 ---
 
@@ -65,7 +65,7 @@ A second module (`app/agents/`, `app/rag/`, `app/services/`) is a **tool-calling
 | Area | Tools |
 |---|---|
 | Agent orchestration | LangGraph (StateGraph, conditional edges, `interrupt`, MemorySaver checkpointer) |
-| LLMs | Google Gemini, Groq (Llama 3.3 70B), via LangChain |
+| LLM | Google Gemini (LangChain + Gemini's OpenAI-compatible API) |
 | Structured output | Pydantic v2 |
 | Retrieval | scikit-learn TF-IDF, ChromaDB, Gemini embeddings |
 | API | FastAPI, Uvicorn |
@@ -86,7 +86,7 @@ CustomerTicketResolution/
 │   ├── schemas.py          # Pydantic Triage contract
 │   ├── config.py           # teams, thresholds, escalation keywords (all tunable)
 │   ├── main.py             # FastAPI: /tickets/analyze, /tickets/investigate
-│   ├── llm.py              # Gemini / Groq / OpenAI provider switch + Langfuse callbacks
+│   ├── llm.py              # Gemini setup (key and model from .env) + Langfuse callbacks
 │   ├── pii.py              # PII masking
 │   ├── retrieval.py        # TF-IDF similar-ticket search
 │   ├── agents/             # tool-calling investigator agent
@@ -101,7 +101,7 @@ CustomerTicketResolution/
 
 ## Getting started
 
-**Requirements:** Python 3.12, and a free API key from [Google AI Studio](https://aistudio.google.com/) or [Groq](https://console.groq.com/).
+**Requirements:** Python 3.12, and a free Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
 
 ```bash
 git clone https://github.com/Sumit-Kumar-Garg/AgenticAI.git
@@ -118,12 +118,11 @@ cp .env.example .env                   # then add your API key
 
 `.env` settings (see `.env.example`):
 
+> The variable names start with `OPENAI_` because the app calls Gemini through Gemini's OpenAI-compatible API. The values are your **Gemini** key and model.
+
 ```env
-LLM_PROVIDER=gemini            # or: groq
-GOOGLE_API_KEY=your-key        # for Gemini
-# GROQ_API_KEY=your-key        # for Groq (also set LLM_PROVIDER=groq)
-# OPENAI_API_KEY=your-key      # for OpenAI (LLM_PROVIDER=openai, needs: pip install langchain-openai)
-# GEMINI_MODEL=gemini-2.5-flash
+OPENAI_API_KEY=your-gemini-api-key
+OPENAI_MODEL=gemini-2.5-flash             # any Gemini model name
 # WEBHOOK_TOKEN=optional-shared-secret
 # LANGFUSE_PUBLIC_KEY=... / LANGFUSE_SECRET_KEY=...   (optional tracing)
 ```
@@ -141,7 +140,7 @@ python -m evals.run_eval
 jupyter lab triage_baseline_vs_llm.ipynb
 ```
 
-Investigator agent (uses `GOOGLE_API_KEY` for knowledge-base embeddings):
+Investigator agent (the same key is used for knowledge-base embeddings):
 
 ```bash
 python -m app.services.database      # build data/support.db from the CSVs

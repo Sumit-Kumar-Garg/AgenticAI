@@ -2,8 +2,7 @@
 
 The model gathers evidence with allow-listed, read-only tools (ticket, booking,
 customer, history, knowledge-base search) and then explains the likely cause and
-the next action. Works with any OpenAI-compatible provider (Gemini, Groq, OpenAI);
-see app/llm.py.
+the next action. Uses Gemini through its OpenAI-compatible API (see app/llm.py).
 """
 import json
 

@@ -49,7 +49,6 @@ fsspec==2026.9.0
 google-auth==2.62.2
 google-genai==3.6.1
 googleapis-common-protos==1.76.0
-groq==1.7.0
 grpcio==1.85.3
 h11==0.16.0
 hf-xet==1.8.0
@@ -89,7 +88,6 @@ kiwisolver==1.5.1
 kubernetes==37.0.3
 langchain-core==1.8.3
 langchain-google-genai==4.5.1
-langchain-groq==1.2.1
 langchain-protocol==0.0.21
 langfuse==5.2.0
 langgraph==1.2.23

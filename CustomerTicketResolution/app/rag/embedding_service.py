@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from app.llm import get_google_api_key
+from app.llm import get_api_key
 
 EMBEDDING_MODEL = "gemini-embedding-001"
 
@@ -9,7 +9,7 @@ EMBEDDING_MODEL = "gemini-embedding-001"
 def _client():
     from google import genai
 
-    return genai.Client(api_key=get_google_api_key())
+    return genai.Client(api_key=get_api_key())
 
 
 def generate_embeddings(texts: list[str]) -> list[list[float]]:
