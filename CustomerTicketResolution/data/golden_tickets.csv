@@ -1,0 +1,9 @@
+ticket_id,text,true_category,true_priority,true_team
+G001,"Hello, I see two identical charges on my card for October. Please reverse one. My email is jane.doe@example.com",billing,P3,Billing
+G002,"The dashboard shows a blank white page since this morning and none of my team can work. This is urgent!!",bug,P1,Technical Support
+G003,"I forgot my password and the reset link says expired every time I click it",access,P3,Account & Access
+G004,"Where can I find the setting to change the currency on invoices?",how_to,P4,Product Experts
+G005,"Your update broke the booking search, results are empty for every city",bug,P2,Technical Support
+G006,"I want my new finance manager to have read-only access to reports, how do I add her?",access,P4,Account & Access
+G007,"Can you add a dark mode to the mobile app?",feature_request,P4,Product Experts
+G008,"You charged my card after I cancelled. I am contacting my lawyer and filing a chargeback today.",billing,P2,Billing

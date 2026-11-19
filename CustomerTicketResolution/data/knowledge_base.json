@@ -1,0 +1,42 @@
+[
+    {
+        "article_id": "KB0001",
+        "issue": "Booking not received by hotel",
+        "solution": "Check hotel confirmation synchronization"
+    },
+    {
+        "article_id": "KB0002",
+        "issue": "Customer charged twice",
+        "solution": "Check hotel confirmation synchronization"
+    },
+    {
+        "article_id": "KB0003",
+        "issue": "Booking cancellation request",
+        "solution": "Check payment gateway transaction logs"
+    },
+    {
+        "article_id": "KB0004",
+        "issue": "Refund not received",
+        "solution": "Check payment gateway transaction logs"
+    },
+    {
+        "article_id": "KB0005",
+        "issue": "Payment failed",
+        "solution": "Verify booking status before retrying"
+    },
+    {
+        "article_id": "KB0006",
+        "issue": "Hotel confirmation missing",
+        "solution": "Check payment gateway transaction logs"
+    },
+    {
+        "article_id": "KB0007",
+        "issue": "Unable to login",
+        "solution": "Check hotel confirmation synchronization"
+    },
+    {
+        "article_id": "KB0008",
+        "issue": "Booking details incorrect",
+        "solution": "Verify booking status before retrying"
+    }
+]

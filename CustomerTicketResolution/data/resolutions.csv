@@ -1,0 +1,301 @@
+resolution_id,ticket_id,root_cause,resolution
+RES00001,TKT00208,Payment gateway timeout,Escalate to hotel operations
+RES00002,TKT00369,Booking confirmation delay,Escalate to hotel operations
+RES00003,TKT00314,Payment gateway timeout,Retry booking synchronization
+RES00004,TKT00232,Customer input error,Retry booking synchronization
+RES00005,TKT00450,Hotel synchronization failure,Escalate to hotel operations
+RES00006,TKT00377,Payment gateway timeout,Escalate to hotel operations
+RES00007,TKT00265,Payment gateway timeout,Verify payment transaction
+RES00008,TKT00150,Customer input error,Escalate to hotel operations
+RES00009,TKT00453,Booking confirmation delay,Initiate refund
+RES00010,TKT00237,Hotel synchronization failure,Escalate to hotel operations
+RES00011,TKT00151,Payment gateway timeout,Verify payment transaction
+RES00012,TKT00238,Customer input error,Retry booking synchronization
+RES00013,TKT00370,Payment gateway timeout,Verify payment transaction
+RES00014,TKT00399,Hotel synchronization failure,Escalate to hotel operations
+RES00015,TKT00212,Booking confirmation delay,Escalate to hotel operations
+RES00016,TKT00013,Hotel synchronization failure,Escalate to hotel operations
+RES00017,TKT00303,Hotel synchronization failure,Escalate to hotel operations
+RES00018,TKT00047,Booking confirmation delay,Initiate refund
+RES00019,TKT00355,Hotel synchronization failure,Retry booking synchronization
+RES00020,TKT00047,Payment gateway timeout,Escalate to hotel operations
+RES00021,TKT00325,Booking confirmation delay,Retry booking synchronization
+RES00022,TKT00269,Customer input error,Verify payment transaction
+RES00023,TKT00194,Customer input error,Retry booking synchronization
+RES00024,TKT00394,Hotel synchronization failure,Initiate refund
+RES00025,TKT00290,Hotel synchronization failure,Verify payment transaction
+RES00026,TKT00445,Hotel synchronization failure,Verify payment transaction
+RES00027,TKT00394,Payment gateway timeout,Escalate to hotel operations
+RES00028,TKT00158,Booking confirmation delay,Escalate to hotel operations
+RES00029,TKT00148,Hotel synchronization failure,Retry booking synchronization
+RES00030,TKT00461,Hotel synchronization failure,Verify payment transaction
+RES00031,TKT00002,Booking confirmation delay,Retry booking synchronization
+RES00032,TKT00235,Customer input error,Escalate to hotel operations
+RES00033,TKT00279,Payment gateway timeout,Escalate to hotel operations
+RES00034,TKT00122,Hotel synchronization failure,Escalate to hotel operations
+RES00035,TKT00233,Customer input error,Escalate to hotel operations
+RES00036,TKT00041,Payment gateway timeout,Verify payment transaction
+RES00037,TKT00452,Booking confirmation delay,Verify payment transaction
+RES00038,TKT00026,Hotel synchronization failure,Verify payment transaction
+RES00039,TKT00029,Booking confirmation delay,Retry booking synchronization
+RES00040,TKT00075,Payment gateway timeout,Initiate refund
+RES00041,TKT00170,Payment gateway timeout,Retry booking synchronization
+RES00042,TKT00056,Customer input error,Verify payment transaction
+RES00043,TKT00083,Booking confirmation delay,Verify payment transaction
+RES00044,TKT00495,Customer input error,Initiate refund
+RES00045,TKT00477,Payment gateway timeout,Retry booking synchronization
+RES00046,TKT00394,Booking confirmation delay,Initiate refund
+RES00047,TKT00189,Customer input error,Retry booking synchronization
+RES00048,TKT00389,Customer input error,Retry booking synchronization
+RES00049,TKT00150,Customer input error,Verify payment transaction
+RES00050,TKT00063,Booking confirmation delay,Initiate refund
+RES00051,TKT00270,Customer input error,Verify payment transaction
+RES00052,TKT00357,Hotel synchronization failure,Retry booking synchronization
+RES00053,TKT00056,Payment gateway timeout,Escalate to hotel operations
+RES00054,TKT00371,Booking confirmation delay,Escalate to hotel operations
+RES00055,TKT00312,Booking confirmation delay,Initiate refund
+RES00056,TKT00270,Booking confirmation delay,Verify payment transaction
+RES00057,TKT00315,Customer input error,Escalate to hotel operations
+RES00058,TKT00253,Hotel synchronization failure,Verify payment transaction
+RES00059,TKT00363,Booking confirmation delay,Verify payment transaction
+RES00060,TKT00001,Payment gateway timeout,Retry booking synchronization
+RES00061,TKT00239,Payment gateway timeout,Verify payment transaction
+RES00062,TKT00410,Customer input error,Escalate to hotel operations
+RES00063,TKT00024,Booking confirmation delay,Initiate refund
+RES00064,TKT00287,Hotel synchronization failure,Retry booking synchronization
+RES00065,TKT00328,Hotel synchronization failure,Initiate refund
+RES00066,TKT00131,Payment gateway timeout,Initiate refund
+RES00067,TKT00154,Booking confirmation delay,Retry booking synchronization
+RES00068,TKT00059,Booking confirmation delay,Initiate refund
+RES00069,TKT00203,Payment gateway timeout,Verify payment transaction
+RES00070,TKT00100,Booking confirmation delay,Initiate refund
+RES00071,TKT00473,Customer input error,Escalate to hotel operations
+RES00072,TKT00409,Payment gateway timeout,Verify payment transaction
+RES00073,TKT00247,Hotel synchronization failure,Escalate to hotel operations
+RES00074,TKT00457,Booking confirmation delay,Escalate to hotel operations
+RES00075,TKT00402,Customer input error,Retry booking synchronization
+RES00076,TKT00428,Booking confirmation delay,Initiate refund
+RES00077,TKT00285,Payment gateway timeout,Verify payment transaction
+RES00078,TKT00296,Booking confirmation delay,Initiate refund
+RES00079,TKT00034,Hotel synchronization failure,Initiate refund
+RES00080,TKT00431,Payment gateway timeout,Initiate refund
+RES00081,TKT00193,Hotel synchronization failure,Escalate to hotel operations
+RES00082,TKT00096,Payment gateway timeout,Initiate refund
+RES00083,TKT00362,Booking confirmation delay,Retry booking synchronization
+RES00084,TKT00140,Customer input error,Retry booking synchronization
+RES00085,TKT00255,Hotel synchronization failure,Initiate refund
+RES00086,TKT00232,Booking confirmation delay,Verify payment transaction
+RES00087,TKT00269,Booking confirmation delay,Verify payment transaction
+RES00088,TKT00058,Booking confirmation delay,Retry booking synchronization
+RES00089,TKT00399,Hotel synchronization failure,Retry booking synchronization
+RES00090,TKT00228,Payment gateway timeout,Escalate to hotel operations
+RES00091,TKT00464,Hotel synchronization failure,Verify payment transaction
+RES00092,TKT00175,Customer input error,Initiate refund
+RES00093,TKT00398,Booking confirmation delay,Verify payment transaction
+RES00094,TKT00394,Payment gateway timeout,Verify payment transaction
+RES00095,TKT00106,Payment gateway timeout,Escalate to hotel operations
+RES00096,TKT00199,Payment gateway timeout,Retry booking synchronization
+RES00097,TKT00160,Payment gateway timeout,Retry booking synchronization
+RES00098,TKT00171,Customer input error,Retry booking synchronization
+RES00099,TKT00053,Booking confirmation delay,Retry booking synchronization
+RES00100,TKT00296,Booking confirmation delay,Verify payment transaction
+RES00101,TKT00165,Hotel synchronization failure,Verify payment transaction
+RES00102,TKT00147,Booking confirmation delay,Initiate refund
+RES00103,TKT00396,Customer input error,Retry booking synchronization
+RES00104,TKT00140,Hotel synchronization failure,Verify payment transaction
+RES00105,TKT00141,Payment gateway timeout,Retry booking synchronization
+RES00106,TKT00491,Payment gateway timeout,Verify payment transaction
+RES00107,TKT00278,Booking confirmation delay,Initiate refund
+RES00108,TKT00139,Hotel synchronization failure,Initiate refund
+RES00109,TKT00294,Hotel synchronization failure,Verify payment transaction
+RES00110,TKT00037,Booking confirmation delay,Initiate refund
+RES00111,TKT00277,Customer input error,Retry booking synchronization
+RES00112,TKT00067,Payment gateway timeout,Escalate to hotel operations
+RES00113,TKT00463,Payment gateway timeout,Retry booking synchronization
+RES00114,TKT00197,Payment gateway timeout,Retry booking synchronization
+RES00115,TKT00219,Customer input error,Verify payment transaction
+RES00116,TKT00361,Customer input error,Initiate refund
+RES00117,TKT00160,Booking confirmation delay,Verify payment transaction
+RES00118,TKT00366,Payment gateway timeout,Escalate to hotel operations
+RES00119,TKT00291,Hotel synchronization failure,Retry booking synchronization
+RES00120,TKT00417,Customer input error,Retry booking synchronization
+RES00121,TKT00234,Booking confirmation delay,Escalate to hotel operations
+RES00122,TKT00241,Hotel synchronization failure,Verify payment transaction
+RES00123,TKT00074,Booking confirmation delay,Initiate refund
+RES00124,TKT00201,Hotel synchronization failure,Initiate refund
+RES00125,TKT00404,Booking confirmation delay,Escalate to hotel operations
+RES00126,TKT00250,Payment gateway timeout,Retry booking synchronization
+RES00127,TKT00244,Payment gateway timeout,Initiate refund
+RES00128,TKT00246,Customer input error,Verify payment transaction
+RES00129,TKT00145,Booking confirmation delay,Verify payment transaction
+RES00130,TKT00261,Payment gateway timeout,Escalate to hotel operations
+RES00131,TKT00419,Payment gateway timeout,Initiate refund
+RES00132,TKT00285,Payment gateway timeout,Initiate refund
+RES00133,TKT00273,Customer input error,Escalate to hotel operations
+RES00134,TKT00303,Customer input error,Verify payment transaction
+RES00135,TKT00318,Hotel synchronization failure,Verify payment transaction
+RES00136,TKT00499,Customer input error,Escalate to hotel operations
+RES00137,TKT00034,Booking confirmation delay,Verify payment transaction
+RES00138,TKT00417,Customer input error,Escalate to hotel operations
+RES00139,TKT00291,Booking confirmation delay,Verify payment transaction
+RES00140,TKT00089,Payment gateway timeout,Escalate to hotel operations
+RES00141,TKT00059,Customer input error,Initiate refund
+RES00142,TKT00285,Payment gateway timeout,Escalate to hotel operations
+RES00143,TKT00091,Booking confirmation delay,Escalate to hotel operations
+RES00144,TKT00036,Payment gateway timeout,Escalate to hotel operations
+RES00145,TKT00168,Customer input error,Retry booking synchronization
+RES00146,TKT00047,Hotel synchronization failure,Verify payment transaction
+RES00147,TKT00455,Payment gateway timeout,Verify payment transaction
+RES00148,TKT00339,Hotel synchronization failure,Escalate to hotel operations
+RES00149,TKT00273,Booking confirmation delay,Escalate to hotel operations
+RES00150,TKT00316,Customer input error,Verify payment transaction
+RES00151,TKT00106,Booking confirmation delay,Initiate refund
+RES00152,TKT00292,Booking confirmation delay,Escalate to hotel operations
+RES00153,TKT00368,Booking confirmation delay,Retry booking synchronization
+RES00154,TKT00299,Payment gateway timeout,Escalate to hotel operations
+RES00155,TKT00434,Hotel synchronization failure,Initiate refund
+RES00156,TKT00032,Booking confirmation delay,Retry booking synchronization
+RES00157,TKT00001,Booking confirmation delay,Retry booking synchronization
+RES00158,TKT00441,Booking confirmation delay,Retry booking synchronization
+RES00159,TKT00121,Customer input error,Escalate to hotel operations
+RES00160,TKT00321,Booking confirmation delay,Escalate to hotel operations
+RES00161,TKT00208,Customer input error,Escalate to hotel operations
+RES00162,TKT00280,Hotel synchronization failure,Verify payment transaction
+RES00163,TKT00244,Hotel synchronization failure,Verify payment transaction
+RES00164,TKT00285,Customer input error,Initiate refund
+RES00165,TKT00431,Customer input error,Verify payment transaction
+RES00166,TKT00148,Hotel synchronization failure,Verify payment transaction
+RES00167,TKT00006,Payment gateway timeout,Retry booking synchronization
+RES00168,TKT00074,Customer input error,Escalate to hotel operations
+RES00169,TKT00500,Hotel synchronization failure,Retry booking synchronization
+RES00170,TKT00071,Customer input error,Escalate to hotel operations
+RES00171,TKT00458,Customer input error,Verify payment transaction
+RES00172,TKT00233,Customer input error,Escalate to hotel operations
+RES00173,TKT00197,Booking confirmation delay,Verify payment transaction
+RES00174,TKT00096,Customer input error,Retry booking synchronization
+RES00175,TKT00296,Customer input error,Verify payment transaction
+RES00176,TKT00365,Booking confirmation delay,Escalate to hotel operations
+RES00177,TKT00475,Booking confirmation delay,Retry booking synchronization
+RES00178,TKT00020,Customer input error,Initiate refund
+RES00179,TKT00058,Customer input error,Retry booking synchronization
+RES00180,TKT00073,Booking confirmation delay,Escalate to hotel operations
+RES00181,TKT00265,Payment gateway timeout,Retry booking synchronization
+RES00182,TKT00126,Customer input error,Retry booking synchronization
+RES00183,TKT00351,Booking confirmation delay,Retry booking synchronization
+RES00184,TKT00463,Booking confirmation delay,Retry booking synchronization
+RES00185,TKT00241,Customer input error,Escalate to hotel operations
+RES00186,TKT00294,Booking confirmation delay,Escalate to hotel operations
+RES00187,TKT00181,Booking confirmation delay,Initiate refund
+RES00188,TKT00086,Payment gateway timeout,Initiate refund
+RES00189,TKT00373,Booking confirmation delay,Retry booking synchronization
+RES00190,TKT00323,Customer input error,Verify payment transaction
+RES00191,TKT00294,Payment gateway timeout,Initiate refund
+RES00192,TKT00415,Payment gateway timeout,Initiate refund
+RES00193,TKT00249,Payment gateway timeout,Verify payment transaction
+RES00194,TKT00259,Payment gateway timeout,Initiate refund
+RES00195,TKT00130,Hotel synchronization failure,Initiate refund
+RES00196,TKT00141,Booking confirmation delay,Retry booking synchronization
+RES00197,TKT00380,Payment gateway timeout,Verify payment transaction
+RES00198,TKT00466,Hotel synchronization failure,Escalate to hotel operations
+RES00199,TKT00190,Hotel synchronization failure,Initiate refund
+RES00200,TKT00401,Hotel synchronization failure,Escalate to hotel operations
+RES00201,TKT00093,Payment gateway timeout,Initiate refund
+RES00202,TKT00044,Hotel synchronization failure,Verify payment transaction
+RES00203,TKT00429,Customer input error,Escalate to hotel operations
+RES00204,TKT00395,Customer input error,Verify payment transaction
+RES00205,TKT00339,Customer input error,Verify payment transaction
+RES00206,TKT00108,Booking confirmation delay,Retry booking synchronization
+RES00207,TKT00329,Booking confirmation delay,Retry booking synchronization
+RES00208,TKT00027,Hotel synchronization failure,Escalate to hotel operations
+RES00209,TKT00205,Customer input error,Initiate refund
+RES00210,TKT00244,Hotel synchronization failure,Escalate to hotel operations
+RES00211,TKT00350,Customer input error,Escalate to hotel operations
+RES00212,TKT00135,Hotel synchronization failure,Escalate to hotel operations
+RES00213,TKT00007,Booking confirmation delay,Escalate to hotel operations
+RES00214,TKT00196,Booking confirmation delay,Retry booking synchronization
+RES00215,TKT00050,Booking confirmation delay,Escalate to hotel operations
+RES00216,TKT00313,Booking confirmation delay,Initiate refund
+RES00217,TKT00139,Booking confirmation delay,Retry booking synchronization
+RES00218,TKT00131,Customer input error,Escalate to hotel operations
+RES00219,TKT00396,Hotel synchronization failure,Verify payment transaction
+RES00220,TKT00267,Booking confirmation delay,Verify payment transaction
+RES00221,TKT00161,Payment gateway timeout,Retry booking synchronization
+RES00222,TKT00426,Payment gateway timeout,Retry booking synchronization
+RES00223,TKT00211,Payment gateway timeout,Retry booking synchronization
+RES00224,TKT00351,Customer input error,Initiate refund
+RES00225,TKT00113,Booking confirmation delay,Initiate refund
+RES00226,TKT00099,Payment gateway timeout,Retry booking synchronization
+RES00227,TKT00318,Payment gateway timeout,Retry booking synchronization
+RES00228,TKT00481,Hotel synchronization failure,Retry booking synchronization
+RES00229,TKT00363,Payment gateway timeout,Retry booking synchronization
+RES00230,TKT00439,Hotel synchronization failure,Escalate to hotel operations
+RES00231,TKT00337,Hotel synchronization failure,Retry booking synchronization
+RES00232,TKT00357,Hotel synchronization failure,Initiate refund
+RES00233,TKT00151,Customer input error,Retry booking synchronization
+RES00234,TKT00328,Customer input error,Initiate refund
+RES00235,TKT00394,Customer input error,Initiate refund
+RES00236,TKT00132,Hotel synchronization failure,Retry booking synchronization
+RES00237,TKT00142,Payment gateway timeout,Escalate to hotel operations
+RES00238,TKT00199,Booking confirmation delay,Retry booking synchronization
+RES00239,TKT00133,Booking confirmation delay,Verify payment transaction
+RES00240,TKT00226,Payment gateway timeout,Escalate to hotel operations
+RES00241,TKT00476,Hotel synchronization failure,Escalate to hotel operations
+RES00242,TKT00092,Customer input error,Retry booking synchronization
+RES00243,TKT00074,Customer input error,Verify payment transaction
+RES00244,TKT00315,Payment gateway timeout,Escalate to hotel operations
+RES00245,TKT00367,Booking confirmation delay,Retry booking synchronization
+RES00246,TKT00018,Payment gateway timeout,Retry booking synchronization
+RES00247,TKT00293,Booking confirmation delay,Escalate to hotel operations
+RES00248,TKT00010,Customer input error,Verify payment transaction
+RES00249,TKT00335,Payment gateway timeout,Retry booking synchronization
+RES00250,TKT00341,Customer input error,Initiate refund
+RES00251,TKT00078,Booking confirmation delay,Escalate to hotel operations
+RES00252,TKT00295,Payment gateway timeout,Escalate to hotel operations
+RES00253,TKT00245,Customer input error,Escalate to hotel operations
+RES00254,TKT00433,Payment gateway timeout,Verify payment transaction
+RES00255,TKT00002,Customer input error,Escalate to hotel operations
+RES00256,TKT00063,Booking confirmation delay,Initiate refund
+RES00257,TKT00350,Booking confirmation delay,Escalate to hotel operations
+RES00258,TKT00029,Payment gateway timeout,Initiate refund
+RES00259,TKT00274,Booking confirmation delay,Retry booking synchronization
+RES00260,TKT00431,Customer input error,Initiate refund
+RES00261,TKT00332,Hotel synchronization failure,Verify payment transaction
+RES00262,TKT00284,Payment gateway timeout,Escalate to hotel operations
+RES00263,TKT00339,Hotel synchronization failure,Initiate refund
+RES00264,TKT00357,Customer input error,Retry booking synchronization
+RES00265,TKT00323,Booking confirmation delay,Escalate to hotel operations
+RES00266,TKT00044,Customer input error,Verify payment transaction
+RES00267,TKT00072,Payment gateway timeout,Verify payment transaction
+RES00268,TKT00013,Hotel synchronization failure,Escalate to hotel operations
+RES00269,TKT00200,Payment gateway timeout,Initiate refund
+RES00270,TKT00256,Customer input error,Retry booking synchronization
+RES00271,TKT00019,Booking confirmation delay,Retry booking synchronization
+RES00272,TKT00173,Payment gateway timeout,Escalate to hotel operations
+RES00273,TKT00061,Hotel synchronization failure,Escalate to hotel operations
+RES00274,TKT00482,Hotel synchronization failure,Verify payment transaction
+RES00275,TKT00474,Payment gateway timeout,Retry booking synchronization
+RES00276,TKT00377,Hotel synchronization failure,Escalate to hotel operations
+RES00277,TKT00335,Payment gateway timeout,Escalate to hotel operations
+RES00278,TKT00465,Payment gateway timeout,Verify payment transaction
+RES00279,TKT00360,Hotel synchronization failure,Retry booking synchronization
+RES00280,TKT00089,Payment gateway timeout,Initiate refund
+RES00281,TKT00421,Payment gateway timeout,Escalate to hotel operations
+RES00282,TKT00313,Hotel synchronization failure,Retry booking synchronization
+RES00283,TKT00419,Payment gateway timeout,Retry booking synchronization
+RES00284,TKT00255,Hotel synchronization failure,Retry booking synchronization
+RES00285,TKT00412,Hotel synchronization failure,Escalate to hotel operations
+RES00286,TKT00173,Customer input error,Initiate refund
+RES00287,TKT00062,Hotel synchronization failure,Initiate refund
+RES00288,TKT00429,Hotel synchronization failure,Retry booking synchronization
+RES00289,TKT00304,Hotel synchronization failure,Initiate refund
+RES00290,TKT00033,Payment gateway timeout,Initiate refund
+RES00291,TKT00073,Customer input error,Verify payment transaction
+RES00292,TKT00357,Booking confirmation delay,Verify payment transaction
+RES00293,TKT00225,Hotel synchronization failure,Retry booking synchronization
+RES00294,TKT00069,Payment gateway timeout,Escalate to hotel operations
+RES00295,TKT00399,Hotel synchronization failure,Retry booking synchronization
+RES00296,TKT00451,Customer input error,Retry booking synchronization
+RES00297,TKT00004,Payment gateway timeout,Verify payment transaction
+RES00298,TKT00475,Payment gateway timeout,Initiate refund
+RES00299,TKT00214,Customer input error,Verify payment transaction
+RES00300,TKT00106,Hotel synchronization failure,Initiate refund

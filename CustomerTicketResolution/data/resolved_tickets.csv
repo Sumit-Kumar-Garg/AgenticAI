@@ -1,0 +1,13 @@
+ticket_id,text,category,team
+R001,"I was charged twice for my monthly subscription this month please refund the duplicate payment",billing,Billing
+R002,"My invoice shows the wrong amount after I upgraded my plan",billing,Billing
+R003,"I need a copy of last year's invoices for my accounting department",billing,Billing
+R004,"The app crashes every time I open the reports page after the latest update",bug,Technical Support
+R005,"Export to CSV button does nothing and no file is downloaded",bug,Technical Support
+R006,"API returns 500 error when I create a new booking with multiple guests",bug,Technical Support
+R007,"I cannot log in, the password reset email never arrives",access,Account & Access
+R008,"Please add my colleague as an admin user on our company account",access,Account & Access
+R009,"My account is locked after too many login attempts",access,Account & Access
+R010,"How do I set up approval rules for travel requests?",how_to,Product Experts
+R011,"Can you explain how to configure custom reports and schedule them weekly?",how_to,Product Experts
+R012,"It would be great if you supported bulk upload of employees from a spreadsheet",feature_request,Product Experts
