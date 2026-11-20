@@ -3,10 +3,8 @@ from app.agents.support_graph import support_graph
 
 if __name__ == "__main__":
 
-    ticket_id = "TKT00001"
-
     result = support_graph.invoke({
-        "ticket_id": ticket_id
+        "ticket_id": "TKT00001"
     })
 
     print("\n========== TICKET INVESTIGATION ==========")
@@ -21,21 +19,21 @@ if __name__ == "__main__":
     print("\n========== CUSTOMER HISTORY ==========")
     print(result.get("customer_history"))
 
+    print("\n========== DATA INTEGRITY WARNINGS ==========")
+    print(result.get("data_integrity_warnings"))
+
     print("\n========== RETRIEVED KNOWLEDGE ==========")
 
-    
-
     for article in result.get("knowledge", []):
-        print("\nArticle:", article["id"])
-        print("Content:", article["text"])
-        print("Distance:", article["distance"])
+        print(article["id"], article["text"])
 
-    print("\n========== DATA INTEGRITY WARNINGS ==========")
-    for warning in result.get("data_integrity_warnings", []):
-        print(warning)
+    print("\n========== GEMINI REASONING ==========")
 
-    if not result.get("data_integrity_warnings"):
-        print("No data integrity issues found.")
+    analysis = result.get("analysis")
+
+    if analysis:
+        for key, value in analysis.items():
+            print(f"\n{key}: {value}")
 
     if result.get("error"):
         print("\nERROR:", result["error"])
