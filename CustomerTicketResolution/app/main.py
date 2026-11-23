@@ -6,12 +6,116 @@ from app.agents.support_agent import investigate_ticket
 from app.models.ticket import TicketRequest
 from app.services.ai_service import analyze_ticket
 
+from app.models.ticket import (
+    InvestigationRequest,
+    InvestigationResponse
+)
+
+from app.agents.support_graph import support_graph
+
+from uuid import uuid4
+
+from langgraph.types import Command
+
+from app.models.ticket import (
+    InvestigationRequest,
+    HumanReviewDecision
+)
+
+
 app = FastAPI(
     title="Agentic AI Support Platform",
     description="AI-powered customer support ticket analysis",
     version="1.0.0"
 )
 
+@app.post("/tickets/investigate")
+def investigate_ticket_api(request: InvestigationRequest):
+
+    # Every investigation gets a unique workflow thread.
+    thread_id = str(uuid4())
+
+    config = {
+        "configurable": {
+            "thread_id": thread_id
+        }
+    }
+
+    try:
+        result = support_graph.invoke(
+            {"ticket_id": request.ticket_id},
+            config=config
+        )
+
+        if result.get("error"):
+            raise HTTPException(
+                status_code=404,
+                detail=result["error"]
+            )
+
+        interrupts = result.get("__interrupt__", [])
+
+        if not interrupts:
+            return {
+                "status": "COMPLETED",
+                "ticket_id": request.ticket_id,
+                "thread_id": thread_id,
+                "result": result
+            }
+
+        return {
+            "status": "PENDING_HUMAN_REVIEW",
+            "ticket_id": request.ticket_id,
+            "thread_id": thread_id,
+            "review_request": interrupts[0].value
+        }
+
+    except HTTPException:
+        raise
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
+
+@app.post("/tickets/review/{thread_id}")
+def submit_human_review(
+    thread_id: str,
+    request: HumanReviewDecision
+):
+
+    config = {
+        "configurable": {
+            "thread_id": thread_id
+        }
+    }
+
+    decision = {
+        "approved": request.approved,
+        "reviewer": request.reviewer,
+        "comment": request.comment
+    }
+
+    try:
+        result = support_graph.invoke(
+            Command(resume=decision),
+            config=config
+        )
+
+        return {
+            "status": result.get("final_status", "UNKNOWN"),
+            "thread_id": thread_id,
+            "ticket_id": result.get("ticket_id"),
+            "human_decision": result.get("human_decision"),
+            "analysis": result.get("analysis")
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
 
 @app.get("/")
 def health_check():

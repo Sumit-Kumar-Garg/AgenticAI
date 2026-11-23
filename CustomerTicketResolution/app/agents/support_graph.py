@@ -1,7 +1,10 @@
-
+import sqlite3
+from langgraph.checkpoint.sqlite import SqliteSaver
 from typing import TypedDict, Any
 
 from langgraph.graph import StateGraph, START, END
+
+from langgraph.types import interrupt
 
 from app.services.business_service import (
     get_ticket,
@@ -17,6 +20,8 @@ from app.services.reasoning_service import analyze_support_case
 
 # Shared state between all LangGraph nodes
 class SupportState(TypedDict, total=False):
+    human_decision: dict[str, Any]
+    final_status: str
     ticket_id: str
     ticket: dict[str, Any]
     booking: dict[str, Any] | None
@@ -125,6 +130,33 @@ def gemini_reasoning_node(state: SupportState) -> dict:
         "analysis": analysis
     }
 
+def human_review_node(state: SupportState) -> dict:
+
+    # Pause the graph and send the recommendation
+    # to a human reviewer.
+
+    review_request = {
+        "type": "HUMAN_APPROVAL_REQUIRED",
+        "ticket_id": state["ticket_id"],
+        "analysis": state.get("analysis"),
+        "data_integrity_warnings": state.get(
+            "data_integrity_warnings", []
+        )
+    }
+
+    # LangGraph pauses here until a human responds.
+    decision = interrupt(review_request)
+
+    approved = decision.get("approved", False)
+
+    return {
+        "human_decision": decision,
+        "final_status": (
+            "APPROVED" if approved else "REJECTED"
+        )
+    }
+
+
 
 # BUILD THE GRAPH
 def build_support_graph():
@@ -144,6 +176,10 @@ def build_support_graph():
     graph.add_node(
         "gemini_reasoning",
         gemini_reasoning_node
+    )
+    graph.add_node(
+    "human_review",
+    human_review_node
     )
 
     graph.add_edge(
@@ -165,12 +201,27 @@ def build_support_graph():
         "gemini_reasoning"
     )
 
+ 
+
     graph.add_edge(
-        "gemini_reasoning",
-        END
+    "gemini_reasoning",
+    "human_review"
     )
 
-    return graph.compile()
+    graph.add_edge(
+    "human_review",
+    END
+    )
+
+    connection = sqlite3.connect(
+    "data/langgraph_checkpoints.sqlite",
+    check_same_thread=False
+    )
+
+    checkpointer = SqliteSaver(connection)
+    checkpointer.setup()
+
+    return graph.compile(checkpointer=checkpointer)
 
 
 support_graph = build_support_graph()
