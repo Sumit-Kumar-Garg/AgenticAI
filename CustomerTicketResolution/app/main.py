@@ -74,11 +74,17 @@ def investigate_ticket_api(request: InvestigationRequest):
 
         if not interrupts:
             return {
-                "status": "COMPLETED",
-                "ticket_id": request.ticket_id,
-                "thread_id": thread_id,
-                "result": result
-            }
+            "status": result.get("final_status", "COMPLETED"),
+            "ticket_id": request.ticket_id,
+            "thread_id": thread_id,
+            "analysis": result.get("analysis"),
+            "recommendation": (
+                result.get("analysis", {}).get("recommended_action")
+            ),
+            "data_integrity_warnings": result.get(
+                "data_integrity_warnings", []
+            )
+        }
 
         return {
             "status": "PENDING_HUMAN_REVIEW",
@@ -166,7 +172,7 @@ def get_ticket_audit(ticket_id: str):
         "total_reviews": len(records),
         "audit_records": records
     }
-    
+
 @app.get("/")
 def health_check():
     return {

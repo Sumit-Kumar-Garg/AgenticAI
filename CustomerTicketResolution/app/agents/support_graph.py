@@ -130,6 +130,60 @@ def gemini_reasoning_node(state: SupportState) -> dict:
         "analysis": analysis
     }
 
+
+def auto_resolution_node(state: SupportState) -> dict:
+    """
+    Completes the automated recommendation path.
+
+    This does not execute refunds, cancellations,
+    payments, or any external business operation.
+    """
+
+    return {
+        "final_status": "AUTO_RECOMMENDED"
+    }
+
+
+def route_after_reasoning(state: SupportState) -> str:
+    analysis = state.get("analysis", {})
+    ticket = state.get("ticket", {})
+
+    warnings = state.get("data_integrity_warnings", [])
+
+    category = analysis.get("category", "OTHER")
+    confidence = analysis.get("confidence", 0)
+
+    priority = ticket.get("priority", "LOW")
+
+    sensitive_categories = {
+        "PAYMENT",
+        "REFUND",
+        "CANCELLATION"
+    }
+
+    # Rule 1: Data integrity problems always require review.
+    if warnings:
+        return "human_review"
+
+    # Rule 2: Respect Gemini's escalation recommendation.
+    if analysis.get("requires_human", True):
+        return "human_review"
+
+    # Rule 3: Escalate low-confidence analysis.
+    if confidence < 0.80:
+        return "human_review"
+
+    # Rule 4: Escalate high-priority tickets.
+    if priority in {"HIGH", "CRITICAL"}:
+        return "human_review"
+
+    # Rule 5: Financial and cancellation issues need review.
+    if category in sensitive_categories:
+        return "human_review"
+
+    return "auto_resolution"
+
+
 def human_review_node(state: SupportState) -> dict:
 
     # Pause the graph and send the recommendation
@@ -182,6 +236,8 @@ def build_support_graph():
     human_review_node
     )
 
+    graph.add_node("auto_resolution", auto_resolution_node)
+
     graph.add_edge(
         START,
         "investigate_ticket"
@@ -201,17 +257,17 @@ def build_support_graph():
         "gemini_reasoning"
     )
 
- 
-
-    graph.add_edge(
+    graph.add_conditional_edges(
     "gemini_reasoning",
-    "human_review"
+    route_after_reasoning,
+        {
+        "human_review": "human_review",
+        "auto_resolution": "auto_resolution"
+        }
     )
 
-    graph.add_edge(
-    "human_review",
-    END
-    )
+    graph.add_edge("human_review", END)
+    graph.add_edge("auto_resolution", END)
 
     connection = sqlite3.connect(
     "data/langgraph_checkpoints.sqlite",
