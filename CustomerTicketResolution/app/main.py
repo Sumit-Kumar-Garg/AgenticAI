@@ -26,6 +26,10 @@ from app.services.audit_service import (
     save_human_review,
     get_review_audit
 )
+from app.services.business_service import get_tickets
+
+from fastapi import Query
+
 
 initialize_audit_table()
 
@@ -34,6 +38,32 @@ app = FastAPI(
     description="AI-powered customer support ticket analysis",
     version="1.0.0"
 )
+
+
+@app.get("/tickets")
+def get_ticket_queue(
+    status: str = "OPEN",
+    limit: int = Query(default=100, ge=1, le=500)
+):
+    allowed_statuses = {"OPEN", "CLOSED", "ALL"}
+
+    if status.upper() not in allowed_statuses:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid status. Use OPEN, CLOSED or ALL."
+        )
+
+    tickets = get_tickets(
+        status=status,
+        limit=limit
+    )
+
+    return {
+        "total_tickets": len(tickets),
+        "filter": status.upper(),
+        "tickets": tickets
+    }
+
 
 @app.get("/tickets/{ticket_id}/audit")
 def get_ticket_audit(ticket_id: str):
