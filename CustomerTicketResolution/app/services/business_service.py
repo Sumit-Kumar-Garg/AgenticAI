@@ -14,6 +14,55 @@ def get_connection():
     return connection
 
 
+def get_tickets(status=None, limit=100):
+    connection = get_connection()
+
+    try:
+        query = """
+            SELECT
+                t.ticket_id,
+                t.customer_id,
+                c.name AS customer_name,
+                t.booking_id,
+                t.description,
+                t.priority,
+                t.status
+            FROM tickets t
+            LEFT JOIN customers c
+                ON t.customer_id = c.customer_id
+        """
+
+        params = []
+
+        if status and status.upper() != "ALL":
+            query += " WHERE UPPER(t.status) = ?"
+            params.append(status.upper())
+
+        query += """
+            ORDER BY
+                CASE UPPER(t.priority)
+                    WHEN 'CRITICAL' THEN 1
+                    WHEN 'HIGH' THEN 2
+                    WHEN 'MEDIUM' THEN 3
+                    ELSE 4
+                END,
+                t.ticket_id DESC
+            LIMIT ?
+        """
+
+        params.append(limit)
+
+        rows = connection.execute(
+            query,
+            params
+        ).fetchall()
+
+        return [dict(row) for row in rows]
+
+    finally:
+        connection.close()
+
+
 def get_customer(customer_id):
 
     connection = get_connection()

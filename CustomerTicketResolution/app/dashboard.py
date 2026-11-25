@@ -102,16 +102,106 @@ st.sidebar.caption("Orchestration: LangGraph")
 
 
 # -------------------------------------------------
+# Ticket Queue
+# -------------------------------------------------
+
+st.header("1. Support Ticket Queue")
+
+filter_col, limit_col = st.columns(2)
+
+with filter_col:
+    selected_status = st.selectbox(
+        "Filter by Status",
+        ["OPEN", "CLOSED", "ALL"]
+    )
+
+with limit_col:
+    selected_limit = st.selectbox(
+        "Maximum Tickets",
+        [50, 100, 200, 500],
+        index=1
+    )
+
+if st.button("Refresh Ticket Queue"):
+
+    with st.spinner("Loading support tickets..."):
+
+        queue_result = api_request(
+            "GET",
+            f"/tickets?status={selected_status}"
+            f"&limit={selected_limit}"
+        )
+
+    if queue_result:
+        st.session_state.ticket_queue = queue_result
+
+if "ticket_queue" not in st.session_state:
+    st.session_state.ticket_queue = None
+
+queue = st.session_state.ticket_queue
+
+if queue:
+
+    tickets = queue.get("tickets", [])
+
+    total = len(tickets)
+
+    open_count = sum(
+        1 for t in tickets
+        if t["status"].upper() == "OPEN"
+    )
+
+    high_priority_count = sum(
+        1 for t in tickets
+        if t["priority"].upper() in ["HIGH", "CRITICAL"]
+    )
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric("Tickets Loaded", total)
+    col2.metric("Open Tickets", open_count)
+    col3.metric("High/Critical Priority", high_priority_count)
+
+    st.subheader("Ticket List")
+
+    if tickets:
+
+        st.dataframe(
+            tickets,
+            use_container_width=True,
+            hide_index=True
+        )
+
+    else:
+        st.info("No tickets found for this filter.")
+
+# -------------------------------------------------
 # Ticket Investigation
 # -------------------------------------------------
 
 st.header("1. Ticket Investigation")
 
-ticket_id = st.text_input(
-    "Enter Ticket ID",
-    value="TKT00001",
-    placeholder="Example: TKT00001"
-)
+available_ticket_ids = []
+
+if st.session_state.ticket_queue:
+    available_ticket_ids = [
+        ticket["ticket_id"]
+        for ticket in st.session_state.ticket_queue.get(
+            "tickets", []
+        )
+    ]
+
+if available_ticket_ids:
+    ticket_id = st.selectbox(
+        "Select Ticket for Investigation",
+        available_ticket_ids
+    )
+else:
+    ticket_id = st.text_input(
+        "Enter Ticket ID",
+        value="TKT00001",
+        placeholder="Example: TKT00001"
+    )
 
 if st.button(
     "Investigate Ticket",
